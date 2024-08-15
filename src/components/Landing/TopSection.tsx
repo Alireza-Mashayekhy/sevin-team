@@ -1,10 +1,70 @@
+"use client";
 import Image from "next/image";
 import TechCard from "../TechCard";
 import { LiaRulerVerticalSolid } from "react-icons/lia";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import "@/styles/homePagination.scss";
+import { Pagination } from "swiper/modules";
 
 export default function TopSection() {
+  const techs = [
+    {
+      icon: <LiaRulerVerticalSolid color="white" size={32} />,
+      title: "UI/UX Designer",
+      programmer: "Programmer Dev",
+    },
+    {
+      icon: <LiaRulerVerticalSolid color="white" size={32} />,
+      title: "UI/UX Designer",
+      programmer: "Programmer Dev",
+    },
+    {
+      icon: <LiaRulerVerticalSolid color="white" size={32} />,
+      title: "UI/UX Designer",
+      programmer: "Programmer Dev",
+    },
+    {
+      icon: <LiaRulerVerticalSolid color="white" size={32} />,
+      title: "UI/UX Designer",
+      programmer: "Programmer Dev",
+    },
+    {
+      icon: <LiaRulerVerticalSolid color="white" size={32} />,
+      title: "UI/UX Designer",
+      programmer: "Programmer Dev",
+    },
+    {
+      icon: <LiaRulerVerticalSolid color="white" size={32} />,
+      title: "UI/UX Designer",
+      programmer: "Programmer Dev",
+    },
+    {
+      icon: <LiaRulerVerticalSolid color="white" size={32} />,
+      title: "UI/UX Designer",
+      programmer: "Programmer Dev",
+    },
+
+    {
+      icon: <LiaRulerVerticalSolid color="white" size={32} />,
+      title: "UI/UX Designer",
+      programmer: "Programmer Dev",
+    },
+  ];
+  const pagination = {
+    clickable: true,
+    renderBullet: function (index: number, className: any) {
+      return `
+      <div class="${className}">
+        <span class="pagination-number">${index + 1 < 10 ? `0${index + 1}` : index + 1}</span>
+        <span class="pagination-bullet"/>
+      </div>
+      `;
+    },
+  };
   return (
-    <div className="relative">
+    <div className="relative overflow-hidden pb-80">
       <Image
         src="/landing/leftBanner.png"
         alt="leftBanner"
@@ -35,33 +95,26 @@ export default function TopSection() {
           Steps To Lunch A Website!
         </h2>
       </div>
-      <div className="mt-48 grid grid-cols-5 gap-8 px-8">
-        <TechCard
-          icon={<LiaRulerVerticalSolid color="white" size={32} />}
-          title="UI/UX Designer"
-          programmer="Programmer Dev"
-        />
-        <TechCard
-          icon={<LiaRulerVerticalSolid color="white" size={32} />}
-          title="UI/UX Designer"
-          programmer="Programmer Dev"
-        />
-        <TechCard
-          icon={<LiaRulerVerticalSolid color="white" size={32} />}
-          title="UI/UX Designer"
-          programmer="Programmer Dev"
-        />
-        <TechCard
-          icon={<LiaRulerVerticalSolid color="white" size={32} />}
-          title="UI/UX Designer"
-          programmer="Programmer Dev"
-        />
-        <TechCard
-          icon={<LiaRulerVerticalSolid color="white" size={32} />}
-          title="UI/UX Designer"
-          programmer="Programmer Dev"
-        />
-      </div>
+      <Swiper
+        spaceBetween={50}
+        slidesPerView={5}
+        className="mt-48 w-full !overflow-visible !px-8"
+        modules={[Pagination]}
+        pagination={pagination}
+      >
+        {techs.map((tech) => {
+          return (
+            <SwiperSlide>
+              <TechCard
+                key={tech.title}
+                icon={tech.icon}
+                title={tech.title}
+                programmer={tech.programmer}
+              />
+            </SwiperSlide>
+          );
+        })}
+      </Swiper>
     </div>
   );
 }
